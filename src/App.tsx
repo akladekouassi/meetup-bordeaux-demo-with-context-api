@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { ContextProvider, Kind } from './ContextLikeRedux/reducer';
+import TestPageApp from './pages/testPage';
 
 function App() {
+  const { state, dispatch } = useContext(ContextProvider);
+  const onChangeStateValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    dispatch({
+      kind: Kind.UpdateInitialDataAction,
+      initialData: 'JE CHANGE LA VALEUR INITIALE DU STATE',
+    });
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={(e: any) => onChangeStateValue(e)}>changer la valeur</button>
+      <TestPageApp />
     </div>
   );
 }
