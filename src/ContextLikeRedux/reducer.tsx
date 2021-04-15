@@ -1,24 +1,51 @@
 import React, { createContext, Dispatch } from 'react';
 
-export interface InitialStateInterface {
-  initialData: string;
+//INITIAL STATE DEF
+export interface Task {
+  title: string;
+  id?: string;
+}
+export interface InitialTaskStateInterface {
+  task: Task;
+  tasks: Task[];
 }
 
+// ACTION ENUM
 export enum Kind {
-  UpdateInitialDataAction,
+  UpdateTaskAction,
+  UpdateTasksAction,
 }
 
-export type Action = {
-  kind: Kind.UpdateInitialDataAction;
-  initialData: string;
-};
+//ACTIONS
+export type Action =
+  | {
+      kind: Kind.UpdateTaskAction;
+      task: Task;
+    }
+  | {
+      kind: Kind.UpdateTasksAction;
+      tasks: Task | Task[];
+    };
 
-export const reducer = (state: InitialStateInterface, action: Action): InitialStateInterface => {
+// REDUCER
+export const reducer = (state: InitialTaskStateInterface, action: Action): InitialTaskStateInterface => {
   switch (action.kind) {
-    case Kind.UpdateInitialDataAction: {
+    case Kind.UpdateTaskAction: {
       return {
         ...state,
-        initialData: action.initialData,
+        task: action.task,
+      };
+    }
+    case Kind.UpdateTasksAction: {
+      if (Array.isArray(action.tasks)) {
+        return {
+          ...state,
+          tasks: action.tasks,
+        };
+      }
+      return {
+        ...state,
+        tasks: [...state.tasks, action.tasks],
       };
     }
 
@@ -27,18 +54,22 @@ export const reducer = (state: InitialStateInterface, action: Action): InitialSt
   }
 };
 
-export const initialState: InitialStateInterface = {
-  initialData: '',
+//INITIAL STATE
+export const initialState: InitialTaskStateInterface = {
+  task: { title: '', id: '' },
+  tasks: [],
 };
 
+// CONTEXT CREATION
 export const ContextProvider = createContext<{
-  state: InitialStateInterface;
+  state: InitialTaskStateInterface;
   dispatch: Dispatch<Action>;
 }>({
   state: initialState,
   dispatch: () => null,
 });
 
+// WRAPPER TO WRAPPE COMPONENT TO CONSUME THE CONTEXT
 export function ContextConsumer(Component: any) {
   return function ConsumerWrapper(props: any) {
     return <ContextProvider.Consumer>{(value) => <Component {...props} context={value} />}</ContextProvider.Consumer>;

@@ -1,13 +1,15 @@
-import React, { FunctionComponent, useReducer } from 'react';
-import { reducer, InitialStateInterface, ContextProvider } from './reducer';
+import React, { FunctionComponent, useReducer, useState } from 'react';
+import { reducer, InitialTaskStateInterface, ContextProvider, Task, Kind } from './reducer';
 
 interface ContextLikeReduxProfiderProps {
   children: React.ReactNode;
 }
 
 const ContextLikeReduxProfider: FunctionComponent<ContextLikeReduxProfiderProps> = ({ children }: ContextLikeReduxProfiderProps) => {
-  const initialState: InitialStateInterface = {
-    initialData: 'La valeur initiale du state',
+  const initialTask: Task[] = JSON.parse(localStorage.getItem('tasks')!) || [];
+  const initialState: InitialTaskStateInterface = {
+    tasks: initialTask,
+    task: { title: '', id: '' },
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
