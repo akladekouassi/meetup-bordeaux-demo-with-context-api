@@ -28,7 +28,11 @@ const ContextLikeReduxProfider: FunctionComponent<ContextLikeReduxProfiderProps>
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return <ContextProvider.Provider value={{ state, dispatch }}>{children}</ContextProvider.Provider>;
+  return (
+    <React.Fragment>
+      <ContextProvider.Provider value={{ state, dispatch }}>{children}</ContextProvider.Provider>
+    </React.Fragment>
+  );
 };
 
 export default ContextLikeReduxProfider;

@@ -41,15 +41,17 @@ const SimpleContextProvider = (props: SimpleContextProviderProps): JSX.Element =
   };
 
   return (
-    <SimpleContext.Provider
-      value={{
-        tasks,
-        addTask,
-        removeTask,
-      }}
-    >
-      {props.children}
-    </SimpleContext.Provider>
+    <React.Fragment>
+      <SimpleContext.Provider
+        value={{
+          tasks,
+          addTask,
+          removeTask,
+        }}
+      >
+        {props.children}
+      </SimpleContext.Provider>
+    </React.Fragment>
   );
 };
 

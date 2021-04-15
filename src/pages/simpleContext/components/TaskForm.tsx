@@ -18,17 +18,19 @@ const TaskForm: FunctionComponent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <input type="text" placeholder="Add Task..." value={title} onChange={handleChange} required className="task-input" />
-      <div className="buttons">
-        <button type="submit" className="btn s-add-task-btn">
-          Add Task
-        </button>
-        <button className="btn s-clear-btn" onClick={() => navigate('/contextLikeRedux')}>
-          Switch plateform
-        </button>
-      </div>
-    </form>
+    <React.Fragment>
+      <form onSubmit={handleSubmit} className="form">
+        <input type="text" placeholder="Add Task..." value={title} onChange={handleChange} required className="task-input" />
+        <div className="buttons">
+          <button type="submit" className="btn s-add-task-btn">
+            Add Task
+          </button>
+          <button className="btn s-clear-btn" onClick={() => navigate('/contextLikeRedux')}>
+            Switch plateform
+          </button>
+        </div>
+      </form>
+    </React.Fragment>
   );
 };
 

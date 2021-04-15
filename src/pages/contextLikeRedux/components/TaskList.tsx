@@ -5,7 +5,7 @@ const TaskList = () => {
   const { state } = useContext(ContextProvider);
 
   return (
-    <div>
+    <React.Fragment>
       {state.tasks.length ? (
         <ul className="list">
           {state.tasks.map((task: any) => {
@@ -15,7 +15,7 @@ const TaskList = () => {
       ) : (
         <div className="no-tasks">No Tasks</div>
       )}
-    </div>
+    </React.Fragment>
   );
 };
 

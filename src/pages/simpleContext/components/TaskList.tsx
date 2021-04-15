@@ -6,7 +6,7 @@ const TaskList: FunctionComponent = () => {
   const { tasks } = useContext(SimpleContext);
 
   return (
-    <div>
+    <React.Fragment>
       {tasks.length ? (
         <ul className="list">
           {tasks.map((task: any) => {
@@ -16,7 +16,7 @@ const TaskList: FunctionComponent = () => {
       ) : (
         <div className="no-tasks">No Tasks</div>
       )}
-    </div>
+    </React.Fragment>
   );
 };
 

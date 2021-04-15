@@ -9,14 +9,16 @@ const Task = ({ task }: any) => {
     dispatch({ kind: Kind.UpdateTasksAction, tasks: newTasks });
   };
   return (
-    <li className="list-item">
-      <span>{task.title} </span>
-      <div>
-        <button className="btn-delete task-btn" onClick={() => removeTask(task.id)}>
-          <i className="fas fa-trash-alt"></i>
-        </button>
-      </div>
-    </li>
+    <React.Fragment>
+      <li className="list-item">
+        <span>{task.title} </span>
+        <div>
+          <button className="btn-delete task-btn" onClick={() => removeTask(task.id)}>
+            <i className="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </li>
+    </React.Fragment>
   );
 };
 

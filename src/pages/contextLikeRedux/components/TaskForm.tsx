@@ -18,17 +18,19 @@ const TaskForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <input type="text" placeholder="Add Task..." value={state.task.title} onChange={handleChange} required className="task-input" />
-      <div className="buttons">
-        <button type="submit" className="btn r-add-task-btn">
-          Add Task
-        </button>
-        <button className="btn r-clear-btn" onClick={() => navigate('/')}>
-          Switch plateform
-        </button>
-      </div>
-    </form>
+    <React.Fragment>
+      <form onSubmit={handleSubmit} className="form">
+        <input type="text" placeholder="Add Task..." value={state.task.title} onChange={handleChange} required className="task-input" />
+        <div className="buttons">
+          <button type="submit" className="btn r-add-task-btn">
+            Add Task
+          </button>
+          <button className="btn r-clear-btn" onClick={() => navigate('/')}>
+            Switch plateform
+          </button>
+        </div>
+      </form>
+    </React.Fragment>
   );
 };
 

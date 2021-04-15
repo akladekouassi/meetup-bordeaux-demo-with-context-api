@@ -6,19 +6,21 @@ import '../../App.css';
 
 const ContextLikeReduxAppContainer: React.FC = () => {
   return (
-    <ContextLikeReduxProfider>
-      <div className="maincontainer">
-        <div className="app-wrapper">
-          <div className="header">
-            <h1>Task Manager from context like redux</h1>
-          </div>
-          <div className="main">
-            <TaskForm />
-            <TaskList />
+    <React.Fragment>
+      <ContextLikeReduxProfider>
+        <div className="maincontainer">
+          <div className="app-wrapper">
+            <div className="header">
+              <h1>Task Manager from context like redux</h1>
+            </div>
+            <div className="main">
+              <TaskForm />
+              <TaskList />
+            </div>
           </div>
         </div>
-      </div>
-    </ContextLikeReduxProfider>
+      </ContextLikeReduxProfider>
+    </React.Fragment>
   );
 };
 

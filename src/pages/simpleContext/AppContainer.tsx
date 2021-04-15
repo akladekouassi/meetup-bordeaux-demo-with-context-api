@@ -6,19 +6,21 @@ import '../../App.css';
 
 const SimpleContextAppContainer: React.FC = () => {
   return (
-    <SimpleContextProvider>
-      <div className="container">
-        <div className="app-wrapper">
-          <div className="header">
-            <h1>Task Manager from simple context</h1>
-          </div>
-          <div className="main">
-            <TaskForm />
-            <TaskList />
+    <React.Fragment>
+      <SimpleContextProvider>
+        <div className="container">
+          <div className="app-wrapper">
+            <div className="header">
+              <h1>Task Manager from simple context</h1>
+            </div>
+            <div className="main">
+              <TaskForm />
+              <TaskList />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleContextProvider>
+      </SimpleContextProvider>
+    </React.Fragment>
   );
 };
 
