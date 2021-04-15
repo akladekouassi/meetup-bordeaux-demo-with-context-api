@@ -1,21 +1,17 @@
-import React, { useContext, Dispatch, useEffect } from 'react';
+import React from 'react';
 import ContextLikeReduxProfider from '../../ContextLikeRedux/contextProvider';
-import { ContextProvider, InitialTaskStateInterface, Action } from '../../ContextLikeRedux/reducer';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
-import Header from './components/Header';
 import '../../App.css';
 
-function AppContainer() {
-  const { state } = useContext(ContextProvider);
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(state.tasks));
-  }, [state.tasks]);
+const ContextLikeReduxAppContainer: React.FC = () => {
   return (
     <ContextLikeReduxProfider>
-      <div className="container">
+      <div className="maincontainer">
         <div className="app-wrapper">
-          <Header />
+          <div className="header">
+            <h1>Task Manager from context like redux</h1>
+          </div>
           <div className="main">
             <TaskForm />
             <TaskList />
@@ -24,6 +20,6 @@ function AppContainer() {
       </div>
     </ContextLikeReduxProfider>
   );
-}
+};
 
-export default AppContainer;
+export default ContextLikeReduxAppContainer;

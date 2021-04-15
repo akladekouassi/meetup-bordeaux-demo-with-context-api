@@ -1,5 +1,5 @@
 /*eslint-disable @typescript-eslint/no-empty-function */
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import * as uuid from 'uuid';
 
 export interface Task {
@@ -11,37 +11,23 @@ interface ContextTypeProps {
   tasks: Task[];
   addTask: (title: string) => void;
   removeTask: (id: string) => void;
-  clearList: () => void;
-  findItem: (id: string) => void;
-  editTask: (title: string, id: string) => void;
-  editItem: any;
 }
 
-export const TaskListContext = createContext<ContextTypeProps>({
+export const SimpleContext = createContext<ContextTypeProps>({
   tasks: [],
   addTask: () => {},
   removeTask: () => {},
-  clearList: () => {},
-  findItem: () => {},
-  editTask: () => {},
-  editItem: null,
 });
 
-export const TaskListContextConsumer = TaskListContext.Consumer;
+export const SimpleContextConsumer = SimpleContext.Consumer;
 
-interface TaskListContextProviderProps {
+interface SimpleContextProviderProps {
   children: React.ReactNode;
 }
 
-const TaskListContextProvider = (props: TaskListContextProviderProps): JSX.Element => {
-  const initialState: Task[] = JSON.parse(localStorage.getItem('tasks')!) || [];
+const SimpleContextProvider = (props: SimpleContextProviderProps): JSX.Element => {
+  const initialState: Task[] = [];
   const [tasks, setTasks] = useState<{ title: string; id: string }[]>(initialState);
-
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
-
-  const [editItem, setEditItem] = useState<Task | undefined>(undefined);
 
   // Add tasks
   const addTask = (title: string) => {
@@ -54,47 +40,24 @@ const TaskListContextProvider = (props: TaskListContextProviderProps): JSX.Eleme
     setTasks(() => oldTasks);
   };
 
-  // Clear tasks
-  const clearList = () => {
-    setTasks(() => []);
-  };
-
-  // Find task
-  const findItem = (id: string | number) => {
-    const item: Task | undefined = tasks.find((task: Task) => task.id === id);
-    setEditItem(item);
-  };
-
-  // Edit task
-  const editTask = (title: string, id: string | number) => {
-    const newTasks = tasks.map((task: any) => (task.id === id ? { title, id } : task));
-    console.log(newTasks);
-    setTasks(newTasks);
-    setEditItem(undefined);
-  };
-
   return (
-    <TaskListContext.Provider
+    <SimpleContext.Provider
       value={{
         tasks,
         addTask,
         removeTask,
-        clearList,
-        findItem,
-        editTask,
-        editItem,
       }}
     >
       {props.children}
-    </TaskListContext.Provider>
+    </SimpleContext.Provider>
   );
 };
 
-export default TaskListContextProvider;
+export default SimpleContextProvider;
 
 // WRAPPER TO WRAPPE COMPONENT TO CONSUME THE CONTEXT
 export function ContextConsumer(Component: any) {
   return function ConsumerWrapper(props: any) {
-    return <TaskListContext.Consumer>{(value) => <Component {...props} context={value} />}</TaskListContext.Consumer>;
+    return <SimpleContext.Consumer>{(value) => <Component {...props} context={value} />}</SimpleContext.Consumer>;
   };
 }

@@ -1,43 +1,30 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { TaskListContext } from '../../../SimpleContext/simpleContext';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React, { useState, useContext, ChangeEvent, FunctionComponent } from 'react';
+import { SimpleContext } from '../../../SimpleContext/simpleContext';
+import { useNavigate } from 'react-router-dom';
 
-const TaskForm = () => {
-  const { addTask, clearList, editTask, editItem } = useContext(TaskListContext);
+const TaskForm: FunctionComponent = () => {
+  const { addTask } = useContext(SimpleContext);
   const [title, setTitle] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (!editItem) {
-      addTask(title);
-      setTitle('');
-    } else {
-      editTask(title, editItem.id);
-    }
+    addTask(title);
+    setTitle('');
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTitle(e.target.value);
   };
-
-  useEffect(() => {
-    if (editItem) {
-      setTitle(editItem.title);
-      console.log(editItem);
-    } else {
-      setTitle('');
-    }
-  }, [editItem]);
 
   return (
     <form onSubmit={handleSubmit} className="form">
       <input type="text" placeholder="Add Task..." value={title} onChange={handleChange} required className="task-input" />
       <div className="buttons">
-        <button type="submit" className="btn add-task-btn">
-          {editItem ? 'Edit Task' : 'Add Task'}
+        <button type="submit" className="btn s-add-task-btn">
+          Add Task
         </button>
-        <button className="btn clear-btn" onClick={() => navigate('/contextLikeRedux')}>
+        <button className="btn s-clear-btn" onClick={() => navigate('/contextLikeRedux')}>
           Switch plateform
         </button>
       </div>

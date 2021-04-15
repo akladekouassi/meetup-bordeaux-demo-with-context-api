@@ -1,5 +1,3 @@
-import React, { createContext, Dispatch } from 'react';
-
 //INITIAL STATE DEF
 export interface Task {
   title: string;
@@ -53,25 +51,3 @@ export const reducer = (state: InitialTaskStateInterface, action: Action): Initi
       return state;
   }
 };
-
-//INITIAL STATE
-export const initialState: InitialTaskStateInterface = {
-  task: { title: '', id: '' },
-  tasks: [],
-};
-
-// CONTEXT CREATION
-export const ContextProvider = createContext<{
-  state: InitialTaskStateInterface;
-  dispatch: Dispatch<Action>;
-}>({
-  state: initialState,
-  dispatch: () => null,
-});
-
-// WRAPPER TO WRAPPE COMPONENT TO CONSUME THE CONTEXT
-export function ContextConsumer(Component: any) {
-  return function ConsumerWrapper(props: any) {
-    return <ContextProvider.Consumer>{(value) => <Component {...props} context={value} />}</ContextProvider.Consumer>;
-  };
-}

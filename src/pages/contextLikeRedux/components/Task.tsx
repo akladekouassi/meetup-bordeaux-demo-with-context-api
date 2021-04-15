@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { ContextProvider, Kind, Task as TaskI } from '../../../ContextLikeRedux/reducer';
-
+import { Kind, Task as TaskI } from '../../../ContextLikeRedux/reducer';
+import { ContextProvider } from '../../../ContextLikeRedux/contextProvider';
 const Task = ({ task }: any) => {
   const { state, dispatch } = useContext(ContextProvider);
   // Remove tasks
   const removeTask = (id: number | string) => {
-    const oldTasks = state.tasks.filter((task: TaskI) => task.id !== id);
-    dispatch({ kind: Kind.UpdateTasksAction, tasks: oldTasks });
+    const newTasks = state.tasks.filter((task: TaskI) => task.id !== id);
+    dispatch({ kind: Kind.UpdateTasksAction, tasks: newTasks });
   };
   return (
     <li className="list-item">

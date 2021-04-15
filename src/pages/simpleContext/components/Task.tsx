@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
-import { TaskListContext } from '../../../SimpleContext/simpleContext';
+import React, { useContext, FunctionComponent } from 'react';
+import { SimpleContext, Task as TaskI } from '../../../SimpleContext/simpleContext';
 
-const Task = ({ task }: any) => {
-  const { removeTask } = useContext(TaskListContext);
+interface TaskProps {
+  task: TaskI;
+}
+
+const Task: FunctionComponent<TaskProps> = ({ task }: TaskProps) => {
+  const { removeTask } = useContext(SimpleContext);
   return (
     <li className="list-item">
       <span>{task.title} </span>

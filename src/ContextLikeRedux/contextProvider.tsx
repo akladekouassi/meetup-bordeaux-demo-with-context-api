@@ -1,12 +1,27 @@
-import React, { FunctionComponent, useReducer, useState } from 'react';
-import { reducer, InitialTaskStateInterface, ContextProvider, Task, Kind } from './reducer';
+import React, { FunctionComponent, useReducer, Dispatch, createContext } from 'react';
+import { reducer, InitialTaskStateInterface, Task, Action } from './reducer';
+
+//INITIAL STATE
+export const initialState: InitialTaskStateInterface = {
+  task: { title: '', id: '' },
+  tasks: [],
+};
+
+// CONTEXT CREATION
+export const ContextProvider = createContext<{
+  state: InitialTaskStateInterface;
+  dispatch: Dispatch<Action>;
+}>({
+  state: initialState,
+  dispatch: () => null,
+});
 
 interface ContextLikeReduxProfiderProps {
   children: React.ReactNode;
 }
 
 const ContextLikeReduxProfider: FunctionComponent<ContextLikeReduxProfiderProps> = ({ children }: ContextLikeReduxProfiderProps) => {
-  const initialTask: Task[] = JSON.parse(localStorage.getItem('tasks')!) || [];
+  const initialTask: Task[] = [];
   const initialState: InitialTaskStateInterface = {
     tasks: initialTask,
     task: { title: '', id: '' },
@@ -17,3 +32,10 @@ const ContextLikeReduxProfider: FunctionComponent<ContextLikeReduxProfiderProps>
 };
 
 export default ContextLikeReduxProfider;
+
+// WRAPPER TO WRAPPE COMPONENT TO CONSUME THE CONTEXT
+export function ContextConsumer(Component: any) {
+  return function ConsumerWrapper(props: any) {
+    return <ContextProvider.Consumer>{(value) => <Component {...props} context={value} />}</ContextProvider.Consumer>;
+  };
+}

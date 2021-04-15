@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
-import { TaskListContext } from '../../../SimpleContext/simpleContext';
 import Task from './Task';
-import { ContextProvider, InitialTaskStateInterface, Action, Kind } from '../../../ContextLikeRedux/reducer';
-
+import { ContextProvider } from '../../../ContextLikeRedux/contextProvider';
 const TaskList = () => {
-  const { state, dispatch } = useContext(ContextProvider);
+  const { state } = useContext(ContextProvider);
 
   return (
     <div>

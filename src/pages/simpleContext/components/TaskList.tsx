@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { TaskListContext } from '../../../SimpleContext/simpleContext';
+import React, { useContext, FunctionComponent } from 'react';
+import { SimpleContext } from '../../../SimpleContext/simpleContext';
 import Task from './Task';
 
-const TaskList = () => {
-  const { tasks } = useContext(TaskListContext);
+const TaskList: FunctionComponent = () => {
+  const { tasks } = useContext(SimpleContext);
 
   return (
     <div>

@@ -1,27 +1,25 @@
-import React, { useContext } from 'react';
-import { ContextProvider, Kind } from '../../ContextLikeRedux/reducer';
-import TaskListContextProvider from '../../SimpleContext/simpleContext';
+import React from 'react';
+import SimpleContextProvider from '../../SimpleContext/simpleContext';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
-
-import Header from './components/Header';
-
 import '../../App.css';
 
-function SimpleContextAppContainer() {
+const SimpleContextAppContainer: React.FC = () => {
   return (
-    <TaskListContextProvider>
+    <SimpleContextProvider>
       <div className="container">
         <div className="app-wrapper">
-          <Header />
+          <div className="header">
+            <h1>Task Manager from simple context</h1>
+          </div>
           <div className="main">
             <TaskForm />
             <TaskList />
           </div>
         </div>
       </div>
-    </TaskListContextProvider>
+    </SimpleContextProvider>
   );
-}
+};
 
 export default SimpleContextAppContainer;
