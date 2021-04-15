@@ -26,6 +26,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 0,
     "@typescript-eslint/ban-ts-ignore": 0,
     "ban-ts-comment": 0,
+    "@typescript-eslint/no-empty-function":"off",
     "@typescript-eslint/ban-ts-comment": "off",
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/no-unused-vars': 0,
